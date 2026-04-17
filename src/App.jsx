@@ -37,13 +37,20 @@ const EVENTS = [
 
 const BookingModal = ({ event, onClose }) => {
   const [persons, setPersons] = useState(1);
+  const [details, setDetails] = useState({ name: '', phone: '', email: '' });
   const pricePerPerson = parseInt(event.price.replace('₹', ''));
   const totalAmount = pricePerPerson * persons;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setDetails(prev => ({ ...prev, [name]: value }));
+  };
 
   return (
     <div className="modal-overlay">
       <div className="modal-content glass">
         <h2 className="modal-title">Complete Your Booking</h2>
+        
         <div className="modal-event-details">
           <div className="modal-event-info">
             <h3>{event.title}</h3>
@@ -53,11 +60,28 @@ const BookingModal = ({ event, onClose }) => {
         </div>
 
         <div className="booking-form">
-          <label>How many people?</label>
-          <div className="person-counter">
-            <button onClick={() => setPersons(Math.max(1, persons - 1))}>-</button>
-            <span>{persons}</span>
-            <button onClick={() => setPersons(persons + 1)}>+</button>
+          <div className="input-group-grid">
+            <div className="modal-input-group">
+              <label>Full Name</label>
+              <input type="text" name="name" placeholder="John Doe" value={details.name} onChange={handleInputChange} required />
+            </div>
+            <div className="modal-input-group">
+              <label>Phone Number</label>
+              <input type="tel" name="phone" placeholder="+91 98765 43210" value={details.phone} onChange={handleInputChange} required />
+            </div>
+          </div>
+          <div className="modal-input-group" style={{marginTop: '1rem'}}>
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="john@example.com" value={details.email} onChange={handleInputChange} required />
+          </div>
+
+          <div className="counter-section" style={{marginTop: '2rem'}}>
+            <label>Number of People</label>
+            <div className="person-counter">
+              <button onClick={() => setPersons(Math.max(1, persons - 1))}>-</button>
+              <span>{persons}</span>
+              <button onClick={() => setPersons(persons + 1)}>+</button>
+            </div>
           </div>
         </div>
 
@@ -69,9 +93,13 @@ const BookingModal = ({ event, onClose }) => {
         <div className="modal-actions">
           <button className="book-btn outline" onClick={onClose}>Cancel</button>
           <button className="book-btn" onClick={() => {
-            alert(`Booking confirmed for ${persons} persons. Total Paid: ₹${totalAmount}`);
+            if(!details.name || !details.phone || !details.email) {
+              alert('Please fill all details');
+              return;
+            }
+            alert(`Booking confirmed!\nBooker: ${details.name}\nTickets: ${persons}\nTotal: ₹${totalAmount}`);
             onClose();
-          }}>Confirm Booking</button>
+          }}>Confirm</button>
         </div>
       </div>
     </div>

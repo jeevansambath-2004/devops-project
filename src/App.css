@@ -129,6 +129,41 @@ header {
   color: var(--primary);
 }
 
+.input-group-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.modal-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.modal-input-group label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 0 !important;
+}
+
+.modal-input-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.75rem;
+  color: white;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.modal-input-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(15, 23, 42, 0.6);
+}
+
 .booking-form {
   margin-bottom: 2rem;
 }
