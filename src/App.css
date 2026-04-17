@@ -75,6 +75,133 @@ header {
   color: var(--primary);
 }
 
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 500px;
+  padding: 2.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.modal-event-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 2rem;
+}
+
+.modal-event-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.modal-event-info p {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.modal-price {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.booking-form {
+  margin-bottom: 2rem;
+}
+
+.booking-form label {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.person-counter {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.person-counter button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.person-counter button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.person-counter span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  min-width: 30px;
+  text-align: center;
+}
+
+.total-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.total-price {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.book-btn.outline {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+}
+
+.book-btn.outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 .user-profile-nav {
   display: flex;
   align-items: center;

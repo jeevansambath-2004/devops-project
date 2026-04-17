@@ -35,13 +35,60 @@ const EVENTS = [
   }
 ];
 
+const BookingModal = ({ event, onClose }) => {
+  const [persons, setPersons] = useState(1);
+  const pricePerPerson = parseInt(event.price.replace('₹', ''));
+  const totalAmount = pricePerPerson * persons;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content glass">
+        <h2 className="modal-title">Complete Your Booking</h2>
+        <div className="modal-event-details">
+          <div className="modal-event-info">
+            <h3>{event.title}</h3>
+            <p>{event.location}</p>
+          </div>
+          <p className="modal-price">{event.price} / person</p>
+        </div>
+
+        <div className="booking-form">
+          <label>How many people?</label>
+          <div className="person-counter">
+            <button onClick={() => setPersons(Math.max(1, persons - 1))}>-</button>
+            <span>{persons}</span>
+            <button onClick={() => setPersons(persons + 1)}>+</button>
+          </div>
+        </div>
+
+        <div className="total-summary">
+          <span>Total Amount</span>
+          <span className="total-price">₹{totalAmount}</span>
+        </div>
+
+        <div className="modal-actions">
+          <button className="book-btn outline" onClick={onClose}>Cancel</button>
+          <button className="book-btn" onClick={() => {
+            alert(`Booking confirmed for ${persons} persons. Total Paid: ₹${totalAmount}`);
+            onClose();
+          }}>Confirm Booking</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Home = () => {
-  const handleBook = (title) => {
-    alert('Ticket Booking Initiated for ' + title);
-  }
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   return (
     <>
+      {selectedEvent && (
+        <BookingModal 
+          event={selectedEvent} 
+          onClose={() => setSelectedEvent(null)} 
+        />
+      )}
       <div className="hero">
         <h1>Experience the <span style={{color: 'var(--primary)'}}>Future</span> of Events</h1>
         <p>Book exclusive tickets to the most premium tech, music, and art experiences globally. Seamless, fast, and secure.</p>
@@ -70,7 +117,7 @@ const Home = () => {
             </div>
             <button 
               className="book-btn"
-              onClick={() => handleBook(event.id)}
+              onClick={() => setSelectedEvent(event)}
             >
               Book Now
             </button>
