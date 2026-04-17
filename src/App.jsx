@@ -10,7 +10,7 @@ const EVENTS = [
     id: 1,
     title: "Cosmic Symphony 2026",
     date: "May 24, 2026",
-    location: "Stellar Arena, NY",
+    location: "Honeywell, Madurai",
     price: "₹1200",
     image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
     category: "Music"
@@ -19,7 +19,7 @@ const EVENTS = [
     id: 2,
     title: "Tech Summit Alpha",
     date: "June 12, 2026",
-    location: "Neo Convention Center",
+    location: "coddisia, coimbatore",
     price: "₹2500",
     image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
     category: "Conference"
@@ -28,7 +28,7 @@ const EVENTS = [
     id: 3,
     title: "Cyberpunk Art Expo",
     date: "July 05, 2026",
-    location: "Digital Gallery",
+    location: "ECR, Chennai",
     price: "₹4500",
     image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
     category: "Art"
