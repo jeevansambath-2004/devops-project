@@ -20,6 +20,59 @@ header {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  transition: all 0.3s;
+}
+
+.search-wrapper.active {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--glass-border);
+}
+
+.header-search-input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  width: 150px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.header-search-input:focus {
+  outline: none;
+}
+
+.user-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  transition: all 0.2s;
+}
+
+.user-nav-link:hover {
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.user-nav-text {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.user-nav-link:hover .user-nav-text {
+  color: var(--primary);
 }
 
 .hero {

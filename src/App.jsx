@@ -82,16 +82,37 @@ const Home = () => {
 };
 
 function App() {
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
     <Router>
       <div className="app-container">
         <header>
           <Link to="/" style={{textDecoration: 'none'}}><div className="logo">STELLAR TICKETS</div></Link>
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-            <Search size={20} color="#94a3b8" style={{cursor: 'pointer'}} />
-            <Link to="/login" style={{color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none'}}>
+            <div className={`search-wrapper ${isSearching ? 'active' : ''}`}>
+              {isSearching && (
+                <input 
+                  type="text" 
+                  placeholder="Search events..." 
+                  className="header-search-input"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                />
+              )}
+              <Search 
+                size={20} 
+                color={isSearching ? "var(--primary)" : "#94a3b8"} 
+                style={{cursor: 'pointer'}} 
+                onClick={() => setIsSearching(!isSearching)}
+              />
+            </div>
+            
+            <Link to="/login" className="user-nav-link">
               <User size={20} color="#94a3b8" />
-              <span style={{fontSize: '0.9rem', color: '#94a3b8'}}>Sign In</span>
+              <span className="user-nav-text">Sign In</span>
             </Link>
           </div>
         </header>
