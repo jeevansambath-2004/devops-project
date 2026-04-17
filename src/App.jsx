@@ -84,6 +84,16 @@ const Home = () => {
 function App() {
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [user, setUser] = useState(null);
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+    // In a real app, we'd store a token in localStorage here
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+  };
 
   return (
     <Router>
@@ -110,18 +120,27 @@ function App() {
               />
             </div>
             
-            <Link to="/login" className="user-nav-link">
-              <User size={20} color="#94a3b8" />
-              <span className="user-nav-text">Sign In</span>
-            </Link>
+            {user ? (
+              <div className="user-profile-nav" onClick={handleLogout}>
+                <div className="avatar">
+                  {user.name.charAt(0)}
+                </div>
+                <span className="user-nav-text">Hi, {user.name.split(' ')[0]}</span>
+              </div>
+            ) : (
+              <Link to="/login" className="user-nav-link">
+                <User size={20} color="#94a3b8" />
+                <span className="user-nav-text">Sign In</span>
+              </Link>
+            )}
           </div>
         </header>
 
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/signup" element={<Signup onLogin={handleLogin} />} />
           </Routes>
         </main>
 
