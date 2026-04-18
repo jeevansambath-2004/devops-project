@@ -33,6 +33,64 @@ body {
   min-height: 100vh;
 }
 
+/* Admin Styles */
+.admin-theme {
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(15, 23, 42, 0.1) 0%, transparent 40%);
+}
+
+.admin-border {
+  border-color: rgba(245, 158, 11, 0.3) !important;
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.1);
+}
+
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.admin-btn {
+  background: #f59e0b !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+.admin-btn:hover {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+.admin-panel-link {
+  color: #f59e0b !important;
+  text-decoration: none;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 2rem;
+  background: rgba(245, 158, 11, 0.05);
+  transition: all 0.2s;
+}
+
+.admin-panel-link:hover {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: #f59e0b;
+}
+
 .glass {
   background: var(--bg-card);
   backdrop-filter: blur(12px);
