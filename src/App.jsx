@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
-import { Ticket, Calendar, MapPin, Search, User, LogIn } from 'lucide-react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Ticket, Calendar, MapPin, Search, User, LogIn, ShieldCheck } from 'lucide-react'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import AdminLogin from './pages/AdminLogin'
 import './App.css'
 
 const EVENTS = [
@@ -50,7 +51,6 @@ const BookingModal = ({ event, onClose }) => {
     <div className="modal-overlay">
       <div className="modal-content glass">
         <h2 className="modal-title">Complete Your Booking</h2>
-        
         <div className="modal-event-details">
           <div className="modal-event-info">
             <h3>{event.title}</h3>
@@ -163,7 +163,6 @@ function App() {
 
   const handleLogin = (userData) => {
     setUser(userData);
-    // In a real app, we'd store a token in localStorage here
   };
 
   const handleLogout = () => {
@@ -176,6 +175,13 @@ function App() {
         <header>
           <Link to="/" style={{textDecoration: 'none'}}><div className="logo">STELLAR TICKETS</div></Link>
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+            {user?.isAdmin && (
+              <div className="admin-panel-link">
+                <ShieldCheck size={16} />
+                CONSOLE
+              </div>
+            )}
+            
             <div className={`search-wrapper ${isSearching ? 'active' : ''}`}>
               {isSearching && (
                 <input 
@@ -197,7 +203,7 @@ function App() {
             
             {user ? (
               <div className="user-profile-nav" onClick={handleLogout}>
-                <div className="avatar">
+                <div className={`avatar ${user.isAdmin ? 'admin-avatar' : ''}`}>
                   {user.name.charAt(0)}
                 </div>
                 <span className="user-nav-text">Hi, {user.name.split(' ')[0]}</span>
@@ -216,6 +222,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/signup" element={<Signup onLogin={handleLogin} />} />
+            <Route path="/admin" element={<AdminLogin onLogin={handleLogin} />} />
           </Routes>
         </main>
 
