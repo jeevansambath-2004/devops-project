@@ -16,7 +16,7 @@ const AdminLogin = ({ onLogin }) => {
     setTimeout(() => {
       onLogin({ email, name: 'System Admin', isAdmin: true });
       setIsLoading(false);
-      navigate('/');
+      navigate('/admin-panel');
     }, 1500);
   };
 
