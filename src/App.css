@@ -609,6 +609,38 @@ header {
   font-size: 0.75rem;
 }
 
+.modal-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.75rem;
+  color: white;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  appearance: none;
+  cursor: pointer;
+}
+
+.modal-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-btn.edit {
+  color: #38bdf8;
+}
+
+.icon-btn.edit:hover {
+  background: rgba(56, 189, 248, 0.1);
+}
+
 @media (max-width: 900px) {
   .admin-layout {
     grid-template-columns: 1fr;
