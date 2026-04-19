@@ -282,7 +282,24 @@ const AdminPanel = ({ events, setEvents, bookings, users }) => {
                   />
                 </div>
               </div>
-              <div className="modal-actions">
+              <div className="modal-input-group" style={{marginTop: '1.5rem'}}>
+                <label>Profile Preview (Auto-assigned)</label>
+                <div 
+                  className="image-preview glass" 
+                  style={{ 
+                    backgroundImage: `url(${newEvent.image})`,
+                    height: '150px',
+                    borderRadius: '12px',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    border: '1px solid var(--glass-border)',
+                    marginTop: '0.5rem'
+                  }}
+                >
+                  <div className="badge sm" style={{top: '10px', right: '10px'}}>{newEvent.category}</div>
+                </div>
+              </div>
+              <div className="modal-actions" style={{marginTop: '2rem'}}>
                 <button type="button" className="book-btn outline" onClick={() => setShowAddEvent(false)}>Cancel</button>
                 <button type="submit" className="book-btn">Add Event</button>
               </div>
@@ -351,7 +368,24 @@ const AdminPanel = ({ events, setEvents, bookings, users }) => {
                   />
                 </div>
               </div>
-              <div className="modal-actions">
+              <div className="modal-input-group" style={{marginTop: '1.5rem'}}>
+                <label>Profile Preview</label>
+                <div 
+                  className="image-preview glass" 
+                  style={{ 
+                    backgroundImage: `url(${editingEvent.image})`,
+                    height: '150px',
+                    borderRadius: '12px',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    border: '1px solid var(--glass-border)',
+                    marginTop: '0.5rem'
+                  }}
+                >
+                   <div className="badge sm" style={{top: '10px', right: '10px'}}>{editingEvent.category}</div>
+                </div>
+              </div>
+              <div className="modal-actions" style={{marginTop: '2rem'}}>
                 <button type="button" className="book-btn outline" onClick={() => setEditingEvent(null)}>Cancel</button>
                 <button type="submit" className="book-btn">Save Changes</button>
               </div>
