@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { Ticket, Calendar, MapPin, Search, User, LogIn, ShieldCheck } from 'lucide-react'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import AdminLogin from './pages/AdminLogin'
+import AdminPanel from './pages/AdminPanel'
 import './App.css'
 
-const EVENTS = [
+const INITIAL_EVENTS = [
   {
     id: 1,
     title: "Cosmic Symphony 2026",
@@ -36,7 +37,7 @@ const EVENTS = [
   }
 ];
 
-const BookingModal = ({ event, onClose }) => {
+const BookingModal = ({ event, onClose, onConfirm }) => {
   const [persons, setPersons] = useState(1);
   const [details, setDetails] = useState({ name: '', phone: '', email: '' });
   const pricePerPerson = parseInt(event.price.replace('₹', ''));
@@ -97,6 +98,12 @@ const BookingModal = ({ event, onClose }) => {
               alert('Please fill all details');
               return;
             }
+            onConfirm({
+              userName: details.name,
+              eventTitle: event.title,
+              persons,
+              totalAmount
+            });
             alert(`Booking confirmed!\nBooker: ${details.name}\nTickets: ${persons}\nTotal: ₹${totalAmount}`);
             onClose();
           }}>Confirm</button>
@@ -106,7 +113,7 @@ const BookingModal = ({ event, onClose }) => {
   );
 };
 
-const Home = () => {
+const Home = ({ events, onAddBooking }) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   return (
@@ -115,6 +122,7 @@ const Home = () => {
         <BookingModal 
           event={selectedEvent} 
           onClose={() => setSelectedEvent(null)} 
+          onConfirm={onAddBooking}
         />
       )}
       <div className="hero">
@@ -123,7 +131,7 @@ const Home = () => {
       </div>
 
       <div className="events-grid">
-        {EVENTS.map((event) => (
+        {events.map((event) => (
           <div key={event.id} className="event-card glass">
             <div className="badge">{event.category}</div>
             <div 
@@ -160,13 +168,27 @@ function App() {
   const [isSearching, setIsSearching] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [user, setUser] = useState(null);
+  
+  // App State
+  const [events, setEvents] = useState(INITIAL_EVENTS);
+  const [bookings, setBookings] = useState([]);
+  const [users, setUsers] = useState([
+    { name: 'System Admin', email: 'admin@stellar.com', isAdmin: true }
+  ]);
 
   const handleLogin = (userData) => {
     setUser(userData);
+    if (!users.find(u => u.email === userData.email)) {
+      setUsers([...users, userData]);
+    }
   };
 
   const handleLogout = () => {
     setUser(null);
+  };
+
+  const addBooking = (booking) => {
+    setBookings([...bookings, booking]);
   };
 
   return (
@@ -176,10 +198,12 @@ function App() {
           <Link to="/" style={{textDecoration: 'none'}}><div className="logo">STELLAR TICKETS</div></Link>
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
             {user?.isAdmin && (
-              <div className="admin-panel-link">
-                <ShieldCheck size={16} />
-                CONSOLE
-              </div>
+              <Link to="/admin-panel" style={{textDecoration: 'none'}}>
+                <div className="user-nav-link" style={{background: 'rgba(245, 158, 11, 0.1)'}}>
+                  <ShieldCheck size={18} color="#f59e0b" />
+                  <span className="user-nav-text" style={{color: '#f59e0b'}}>CONSOLE</span>
+                </div>
+              </Link>
             )}
             
             <div className={`search-wrapper ${isSearching ? 'active' : ''}`}>
@@ -219,10 +243,18 @@ function App() {
 
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home events={events} onAddBooking={addBooking} />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/signup" element={<Signup onLogin={handleLogin} />} />
             <Route path="/admin" element={<AdminLogin onLogin={handleLogin} />} />
+            <Route path="/admin-panel" element={
+              <AdminPanel 
+                events={events} 
+                setEvents={setEvents} 
+                bookings={bookings} 
+                users={users} 
+              />
+            } />
           </Routes>
         </main>
 
