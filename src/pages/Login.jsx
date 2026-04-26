@@ -68,6 +68,10 @@ const Login = ({ onLogin }) => {
         <p className="auth-switch">
           Don't have an account? <Link to="/signup">Create One</Link>
         </p>
+
+        <p className="auth-switch" style={{marginTop: '0.5rem', opacity: '0.7'}}>
+          Management? <Link to="/admin" style={{color: '#f59e0b'}}>Login as Admin</Link>
+        </p>
       </div>
     </div>
   );

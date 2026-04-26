@@ -81,6 +81,10 @@ const Signup = ({ onLogin }) => {
         <p className="auth-switch">
           Already have an account? <Link to="/login">Sign In</Link>
         </p>
+
+        <p className="auth-switch" style={{marginTop: '0.5rem', opacity: '0.7'}}>
+          Are you staff? <Link to="/admin" style={{color: '#f59e0b'}}>Login as Admin</Link>
+        </p>
       </div>
     </div>
   );
