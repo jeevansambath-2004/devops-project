@@ -25,7 +25,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Add your test commands here, e.g., npm test
+                // Add your test commands here, e.g., bat 'npm test'
                 echo 'No tests defined yet.'
             }
         }
@@ -35,12 +35,9 @@ pipeline {
                 script {
                     if (env.BRANCH_NAME == 'main') {
                         echo 'Deploying to PRODUCTION environment...'
-                        // Add production deployment commands here
-                    } else if (env.BRANCH_NAME == 'develop') {
-                        echo 'Deploying to STAGING environment...'
-                        // Add staging deployment commands here
+                        // Add your deployment commands here
                     } else {
-                        echo "Skipping deployment for feature branch: ${env.BRANCH_NAME}"
+                        echo "Skipping deployment for branch: ${env.BRANCH_NAME}"
                     }
                 }
             }
@@ -52,10 +49,10 @@ pipeline {
             echo 'Pipeline completed.'
         }
         success {
-            echo 'Build successful! Artifacts are ready.'
+            echo 'Build successful!'
         }
         failure {
-            echo 'Build failed. Visual check required.'
+            echo 'Build failed. Please check the logs.'
         }
     }
 }
